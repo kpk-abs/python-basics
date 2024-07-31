@@ -1,39 +1,5 @@
 import csv
 
-distances = [
-  {
-    "start": 'chennai',
-    "end": 'viluppuram',
-    "distance": 166,
-  },
-  {
-    "start": 'viluppuram',
-    "end": 'trichy',
-    "distance": 165,
-  },
-  {
-    "start": 'trichy',
-    "end": 'madurai',
-    "distance": 138,
-  },
-  {
-    "start": 'madurai',
-    "end": 'tirunelveli',
-    "distance": 171,
-  },
-  {
-    "start": 'tirunelveli',
-    "end": 'kanyakumari',
-    "distance": 85,
-
-  },
-  {
-    "start": 'karur',
-    "end": 'trichy',
-    "distance": 83,
-  },
-]
-
 routes = [
   {
     "route": 'chennai-trichy',
@@ -88,5 +54,29 @@ def getComputedDistance(routes, distances):
     for route in routes:
         routesWithDistance.append(addTotalDistance(route, distances))
     return routesWithDistance
+  
+def convertType(intColumns, distance):
+  for col in intColumns:
+          if col in distance and distance[col]:
+            distance[col] = int(distance[col])
+  return distance
 
-print(getComputedDistance(routes, distances))
+def readCSV():
+  distances = []
+  intColumns = ['distance']
+  with open('distances.csv', mode='r') as file:
+      reader = csv.DictReader(file)
+      for distance in reader:
+        distance = convertType(intColumns, distance)
+        distances.append(distance)
+  return distances
+
+def displayDistance(routes, distances):
+  routesWithTotalDistance = getComputedDistance(routes, distances)
+  print(routesWithTotalDistance)
+  
+def main():
+  distances = readCSV()
+  displayDistance(routes, distances)
+  
+main()
