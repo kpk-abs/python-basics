@@ -36,7 +36,6 @@ def getDistance(stop, distances):
     for distance in distances:
             if(stop["start"] == distance["start"] and stop["end"] == distance["end"]) or (stop["start"] == distance["end"] and stop["end"] == distance["start"]):
                 return distance["distance"]
-    
 
 def getTotalDistance(route, distances):
     totalDistance = 0
@@ -47,7 +46,6 @@ def getTotalDistance(route, distances):
 def addTotalDistance(route, distances):
     route["totalDistance"] = getTotalDistance(route,distances)
     return route
-
 
 def getComputedDistance(routes, distances):
     routesWithDistance = []
