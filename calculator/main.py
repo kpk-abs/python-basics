@@ -1,16 +1,12 @@
 import sys
+  
+add = lambda x,y : x + y
 
-def add(x, y):
-    return x + y
+subtract = lambda x,y : x - y
 
-def subtract(x, y):
-    return x - y
+multiply = lambda x,y : x * y
 
-def multiply(x, y):
-    return x * y
-
-def divide(x, y):
-    return x / y
+divide = lambda x,y : x / y
 
 def calculateResult(num1, operator, num2):
     operations = {
