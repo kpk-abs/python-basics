@@ -1,19 +1,12 @@
 import sys
   
-add = lambda x,y : x + y
-
-subtract = lambda x,y : x - y
-
-multiply = lambda x,y : x * y
-
-divide = lambda x,y : x / y
 
 def calculateResult(num1, operator, num2):
     operations = {
-        '+': add,
-        '-': subtract,
-        '*': multiply,
-        '/': divide
+        '+': lambda x,y : x + y,
+        '-': lambda x,y : x - y,
+        '*': lambda x,y : x * y,
+        '/': lambda x,y : x / y
     }
 
     operation = operations.get(operator)
