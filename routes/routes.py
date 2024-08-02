@@ -18,10 +18,7 @@ def addTotalDistance(route, distances):
     return route
 
 def getComputedDistance(routes, distances):
-    routesWithDistance = []
-    for route in routes:
-        routesWithDistance.append(addTotalDistance(route, distances))
-    return routesWithDistance
+    return [addTotalDistance(route, distances) for route in routes]
   
 def convertType(intColumns, distance):
   for col in intColumns:
