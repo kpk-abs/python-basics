@@ -1,37 +1,5 @@
 import pandas as pd
 
-routes = [
-  {
-    "route": 'chennai-trichy',
-    "stops": [
-      { "start": 'chennai', "end": 'viluppuram' },
-      { "start": 'viluppuram', "end": 'trichy' },
-    ],
-  },
-  {
-    "route": 'chennai-karur',
-    "stops": [
-      { "start": 'chennai', "end": 'viluppuram' },
-      { "start": 'viluppuram', "end": 'trichy' },
-      { "start": 'trichy', "end": 'karur' },
-    ]
-  },
-  {
-    "route": 'trichy-tirunelveli',
-    "stops": [
-      { "start": 'trichy', "end": 'madurai' },
-      { "start": 'madurai', "end": 'tirunelveli' },
-    ]
-  },
-  {
-    "route": 'karur-viluppuram',
-    "stops": [
-      { "start": 'karur', "end": 'trichy' },
-      { "start": 'trichy', "end": 'viluppuram' },
-    ]
-  },
-]
-
 def getDistance(stops,ind, distances):
   for distance in distances:
         if(stops[ind] == distance["Start"] and stops[ind+1] == distance["End"]):
@@ -54,12 +22,6 @@ def getComputedDistance(routes, distances):
     for route in routes:
         routesWithDistance.append(addTotalDistance(route, distances))
     return routesWithDistance
-  
-def convertType(intColumns, distance):
-  for col in intColumns:
-          if col in distance and distance[col]:
-            distance[col] = int(distance[col])
-  return distance
 
 def covertToArray(arrayColumns, route):
   for col in arrayColumns:
@@ -67,20 +29,25 @@ def covertToArray(arrayColumns, route):
             route[col] = route[col].split(',')
   return route
 
-def readDistancesCSV():
-  distancesAsArray = pd.read_csv('Distance.csv')
-  distances = distancesAsArray.to_dict(orient='records')
-  return distances
+def readCSV(fileName):
+  dataAsArray = pd.read_csv(fileName)
+  data = dataAsArray.to_dict(orient='records')
+  return data
 
-def readRoutesCSV():
+def processRoutes(routesFromCSV):
   routes = []
-  routesAsArray = pd.read_csv('Route.csv')
-  modifiedRoutes = routesAsArray.to_dict(orient='records')
   arrayColumns = ['Stops']
-  for route in modifiedRoutes:
+  for route in routesFromCSV:
     route = covertToArray(arrayColumns, route)
     routes.append(route)
   return routes
+
+def readDistancesCSV():
+  return readCSV('Distance.csv')
+
+def readRoutesCSV():
+  routesFromCSV = readCSV('Route.csv')
+  return processRoutes(routesFromCSV)
 
 def displayDistance(routes, distances):
   routesWithTotalDistance = getComputedDistance(routes, distances)
