@@ -1,10 +1,9 @@
-def calculateResult(num1, operator, num2):
-    operations = {
+operations = {
         '+': lambda x,y : x + y,
         '-': lambda x,y : x - y,
         '*': lambda x,y : x * y,
         '/': lambda x,y : x / y
     }
 
-    operation = operations.get(operator)
-    return operation(num1, num2)
+def calculateResult(num1, operator, num2):
+    return operations[operator](num1,num2)
